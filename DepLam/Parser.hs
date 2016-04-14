@@ -19,6 +19,11 @@ variable = do
   x <- identifier
   return (Var x)
 
+star :: Parser Expr
+star = do
+  x <- reservedOp "*"
+  return (Kind Star)
+
 lambda :: Parser Expr
 lambda = do
   reservedOp "\\"
@@ -33,6 +38,7 @@ lambda = do
 term :: Parser Expr
 term =  parens expr
     <|> variable
+    <|> star
     <|> lambda
 
 expr :: Parser Expr
