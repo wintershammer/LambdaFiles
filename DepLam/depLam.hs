@@ -6,6 +6,7 @@ import Data.List (map,foldl,(\\),union,elem)
 
 import Types
 
+
 import Control.Monad (when,liftM)
 
 import Data.Monoid ((<>))
@@ -155,18 +156,6 @@ nf ee = spine ee []
 betaEq :: Expr -> Expr -> Bool
 betaEq e1 e2 = alphaEq (nf e1) (nf e2)
 
-
-base = Var "Base"
-nid  = Lam "x" base (Var "x") -- lx.x
-plid =  Lam "a" (Kind Star) (Lam "x" (Var "a") (Var "x")) -- la:*.lx:a.x
-appla = App nid (Var "a")
-applb  = App (App plid (Var "Base")) (Var "a") -- (la:*.lx:a.x) Base a 
--- ie you gotta feed it a type first and it returns the identity function for that type
-
-myEnv = Env [("Base", Kind Star),("a",Var "Base")]
-
-chka = tCheck myEnv appla
-chkb = tCheck myEnv applb
 
 
 
