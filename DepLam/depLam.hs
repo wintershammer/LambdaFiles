@@ -65,6 +65,15 @@ allowedKinds =
   ,(Kind Box, Kind Star)
   ,(Kind Box, Kind Box)]
 
+-- ^^^^^^^^^^^^
+-- (*,*) values can depend on values. Just this gives the simply typed λ calculus. 
+-- ([],[]) types can depend on types. ([],*) values can depend on type. 
+-- Include all these three and you get Fω. 
+-- (*,[]) types can depend on values. Include this one to get dependent types. 
+-- Include all four and you get Calculus of Constructions
+-- If you always include (*,*), but make a choice of the other 3 you get 8 choices; these are the corners of the lambda cube. 
+
+
 -- (\x. \y.x)(\z.z)
 -- App (Lam "x" $ Lam "y" $ Var "x") (Lam "z" $ Var "z")
 
