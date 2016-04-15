@@ -30,7 +30,8 @@ tCheck r (App f a) = do
   case tf of
    Pi x at rt -> do
      ta <- tCheck r a
-     when (not (betaEq ta at)) $ Left "Bad function argument type"
+     tat <- spesh r at
+     when (not (betaEq ta tat)) $ Left "Bad function argument type"
      Right $ subst x a rt
    _ -> Left "Non-function in application"
 tCheck r (Lam s t e) = do
@@ -166,6 +167,11 @@ betaEq :: Expr -> Expr -> Bool
 betaEq e1 e2 = alphaEq (nf e1) (nf e2)
 
 
+spesh :: Env -> Type -> TC Type -- Lol worst solution ever?
+spesh (Env r) s =
+  case s of
+   (Var name) -> findVar (Env r) (name ++ "a")
+   otherwise  -> Right $ otherwise
 
 
 -- Testing !

@@ -1,0 +1,11 @@
+For now, i save the definition of a type in the env as: type name + "a"
+And of course the "type" of the type as * 
+
+And when I need to typecheck an application , if the function is of type (Var "Something")
+I look up the definition of "Something" + "a", and check it against the argument type.
+
+Works pretty well for now but its ugly, maybe I should have a seperate Env for definitions?
+
+for example
+
+Env = [(Bool, *), (Boola , (a::*) -> a -> a -> a)]
